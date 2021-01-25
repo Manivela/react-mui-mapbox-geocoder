@@ -40,6 +40,7 @@ type Props = {
   showLoader?: boolean;
   focusOnMount?: boolean;
   onSelect: (param: any) => void;
+  onClear?: () => void;
   onSuggest?: (results: any[]) => void;
   onInputBlur?: (event: any) => void;
   onInputFocus?: (event: any) => void;
@@ -128,6 +129,7 @@ const MatGeocoder = ({
   language,
   suggestionsPaperProps,
   onSelect,
+  onClear,
   accessToken,
   onInputFocus,
   onInputBlur,
@@ -167,6 +169,9 @@ const MatGeocoder = ({
 
   const handleClearInput = useCallback(() => {
     setValue('');
+    if(onClear){
+      onClear()
+    }
     // After clear button is clicked the input should be re-focused automatically.
     focusInput();
   }, [focusInput]);
